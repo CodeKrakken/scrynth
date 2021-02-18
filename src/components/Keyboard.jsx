@@ -36,8 +36,8 @@ class Keyboard extends Component {
 
   render = () => {
     return ( 
-      <div aria-label="keyboard">
-        I am the keyboard
+      <div>
+        <button>C4</button>
       </div>
     )
   }

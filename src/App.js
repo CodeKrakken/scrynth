@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       scrynth
-      <button aria-label="key"></button>
+      <Keyboard />
     </div>
   );
 }
