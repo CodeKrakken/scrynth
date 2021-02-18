@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import Keyboard from './Keyboard'
 
 describe('keyboard', function() {
@@ -12,5 +12,10 @@ describe('keyboard', function() {
 
   it('has C4 key', function() {
     expect(screen.getByText('C4')).toBeInTheDocument()
+  })
+
+  it('plays a C4 note when clicked', function() {
+    fireEvent.click(screen.getByText('C4'))
+    expect(screen.getByText('Played note C4.')).toBeInTheDocument()
   })
 })
