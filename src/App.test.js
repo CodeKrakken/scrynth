@@ -4,6 +4,8 @@ import App from './App';
 describe('app', () => {
   it('renders app component', () => {
     render(<App />)
-    screen.debug()
+    expect(screen.getByText('scrynth')).toBeInTheDocument()
   })
 })
+
+// remember, you can always use screen.debug()
