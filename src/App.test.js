@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import Keyboard from './components/Keyboard'
 
 describe('app', () => {
 
@@ -15,6 +14,7 @@ describe('app', () => {
   it('renders the keyboard component', () => {
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
+
 })
 
 // remember, you can always use screen.debug()

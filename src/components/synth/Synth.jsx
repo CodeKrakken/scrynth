@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Keyboard extends Component {
+class Synth extends Component {
   state = {
     notes: {
       'C' : 4186.01,
@@ -35,12 +35,8 @@ class Keyboard extends Component {
   }
 
   render = () => {
-    return ( 
-      <div>
-        <button>C4</button>
-      </div>
-    )
+    return null
   }
 }
 
-export default Keyboard
+export default Synth
