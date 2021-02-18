@@ -4,7 +4,7 @@ class Keyboard extends Component {
   render = () => {
     return (
       <div>
-        <button></button>
+        <button>C4</button>
       </div>
     )
   }
