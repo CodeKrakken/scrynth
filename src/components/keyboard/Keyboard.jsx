@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Keyboard extends Component {
-  render = () => {
-    return (
-      <div>
-        <button>C4</button>
-      </div>
-    )
+function Keyboard({ playNote }) {
+  return (
+    <div>
+      <button
+        onClick={handleClick}>C4</button>
+    </div>
+  )
+
+  function handleClick() {
+    playNote()
   }
 }
 
