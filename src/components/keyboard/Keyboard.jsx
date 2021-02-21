@@ -1,15 +1,23 @@
 import React from 'react'
 
-function Keyboard({ playNote }) {
+function Keyboard({ play, stop }) {
   return (
     <div>
       <button
-        onClick={handleClick}>C4</button>
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+      >
+        C4
+      </button>
     </div>
   )
 
-  function handleClick() {
-    playNote()
+  function onKeyDown() {
+    play()
+  }
+
+  function onKeyUp() {
+    stop()
   }
 }
 

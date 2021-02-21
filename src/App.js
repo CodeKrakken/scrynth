@@ -11,18 +11,20 @@ function App() {
   gain.connect(context.destination);
   gain.gain.value = 0
   oscillator1.start(0);
-  let playing = false
   
   return (
     <div>
       scrynth
-      <Keyboard playNote={playNote} />
+      <Keyboard play={play} stop={stop} />
     </div>
   );
 
-  function playNote() {
-    playing ? gain.gain.value = 0 : gain.gain.value = 1
-    playing = !playing
+  function play() {
+    gain.gain.value = 1
+  }
+
+  function stop() {
+    gain.gain.value = 0
   }
 }
 
