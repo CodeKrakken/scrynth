@@ -33,9 +33,10 @@ class Synth extends Component {
     const roundedFrequency = +frequency.toFixed(2)
     return roundedFrequency;
   }
-
+// add onload function to below return div to set up oscillator stuff
   render = () => {
-    return null
+    return <div>
+    </div>
   }
 }
 
