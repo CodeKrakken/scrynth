@@ -1,37 +1,28 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
 function Keyboard({ play, stop }) {
-  return (
-    <div>
 
-      <button
-        onKeyDown={onKeyDown}
-        onKeyUp={onKeyUp}
-      >
-        C4
-      </button>
-      <input type="text" onKeyDown={myFunction} />
-
-    </div>
-  )
-
-  function onKeyDown() {
-    play()
-  }
-
-  function onKeyUp() {
-    stop()
-  }
-
-  function myFunction(event) {
-    var x = event.keyCode;
-    if (x === 27) {  // 27 is the ESC key
-      alert ("You pressed the Escape key!");
+  useEffect(() => {
+    function handleKeyDown(e) {
+      play(e)
     }
-    if (x === 90) {
-      alert ('Z')
+
+    function handleKeyUp(e) {
+      stop(e)
     }
-  }
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+
+    // Don't forget to clean up
+    return function cleanup() {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    }
+  }, [play, stop]);
+
+  return <div>Keydown</div>;
+
 }
 
 export default Keyboard
