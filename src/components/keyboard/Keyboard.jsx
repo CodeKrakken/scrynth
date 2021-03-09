@@ -21,7 +21,7 @@ function Keyboard({ play, stop }) {
     }
   }, [play, stop]);
 
-  return <div>Keydown</div>;
+  return <div>KEYBOARD</div>;
 
 }
 

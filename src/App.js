@@ -1,30 +1,27 @@
 import './App.css';
 import Keyboard from './components/keyboard/Keyboard'
+import Synth from './components/synth/Synth'
 
 function App() {
-
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  const context = new AudioContext();
-  const oscillator1 = context.createOscillator();
-  const gain = context.createGain()
-  oscillator1.connect(gain);
-  gain.connect(context.destination);
-  gain.gain.value = 0
-  oscillator1.start(0);
+  let playing = false
   
   return (
     <div>
-      scrynth
       <Keyboard play={play} stop={stop} />
+      <Synth playing={playing} />
     </div>
   );
 
   function play() {
-    gain.gain.value = 1
+    // gain.gain.value = 1
+    playing = true
+    console.log(playing)
   }
 
   function stop() {
-    gain.gain.value = 0
+    // gain.gain.value = 0
+    playing = false
+    console.log(playing)
   }
 }
 

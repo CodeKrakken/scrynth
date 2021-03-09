@@ -1,10 +1,10 @@
-'use strict'
+
 import Synth from './Synth';
 let synth
 
 describe('synth', function() {
   beforeEach(function() {
-    synth = new Synth
+    synth = new Synth()
   })
 
   it('can be initialised', function() {

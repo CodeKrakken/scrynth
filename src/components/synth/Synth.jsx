@@ -1,4 +1,5 @@
-import { Component } from 'react'
+import { Component, useEffect } from 'react'
+import React from 'react'
 
 class Synth extends Component {
   state = {
@@ -15,8 +16,15 @@ class Synth extends Component {
       'A' : 7040.00,
       'A#': 7458.62,
       'B' : 7902.13
-    }
+    },
+    
   }
+
+  // useEffect(() => {
+  //   if(playing changes) {
+  //     oh who cares
+  //   }
+  // }, [playing]);
   
   getNote = (noteString) => {
     let noteArray = noteString.split('')
@@ -33,10 +41,23 @@ class Synth extends Component {
     const roundedFrequency = +frequency.toFixed(2)
     return roundedFrequency;
   }
-// add onload function to below return div to set up oscillator stuff
+
   render = () => {
-    return <div>
-    </div>
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const context = new AudioContext();
+    const oscillator1 = context.createOscillator();
+    const gain = context.createGain()
+    let playing = this.props.playing
+    oscillator1.connect(gain);
+    gain.connect(context.destination);
+    playing ? gain.gain.value = 1 : gain.gain.value = 0
+    console.log(playing)
+    oscillator1.start(0);
+    return (
+      <div>
+        SYNTH
+      </div>
+    ) 
   }
 }
 
