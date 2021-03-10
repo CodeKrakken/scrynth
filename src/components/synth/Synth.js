@@ -40,8 +40,10 @@ function Synth() {
   oscillator1.start(0);
 
   this.play = function(keyCode) {
-    oscillator1.frequency.value = this.getNote(this.keyCodes[keyCode])
-    gain.gain.value = 1
+    if (keyCode in this.keyCodes) {
+      oscillator1.frequency.value = this.getNote(this.keyCodes[keyCode])
+      gain.gain.value = 1
+    }
   }
 
   this.stop = function() {
@@ -51,7 +53,8 @@ function Synth() {
   this.getNote = (noteString) => {
     let noteArray = noteString.split('')
     let octave = noteArray.pop()
-    noteString = noteArray.join()
+    noteString = noteArray.join('')
+    console.log(noteString)
     let transposition = octave - 8
     let frequency = this.notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
