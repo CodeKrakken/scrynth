@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
+import Synth from '../synth/Synth';
+const synth = new Synth()
 
-function Keyboard({ play, stop }) {
+function Keyboard() {
 
   useEffect(() => {
     function handleKeyDown(e) {
-      play(e)
+      synth.play(e)
     }
 
     function handleKeyUp(e) {
-      stop(e)
+      synth.stop(e)
     }
 
     document.addEventListener('keydown', handleKeyDown);
@@ -19,7 +21,7 @@ function Keyboard({ play, stop }) {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     }
-  }, [play, stop]);
+  }, []);
 
   return <div>KEYBOARD</div>;
 
