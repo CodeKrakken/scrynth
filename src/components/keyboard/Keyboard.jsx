@@ -10,8 +10,8 @@ function Keyboard() {
       console.log(e.keyCode)
     }
 
-    function handleKeyUp(e) {
-      synth.stop(e)
+    function handleKeyUp() {
+      synth.stop()
     }
 
     document.addEventListener('keydown', handleKeyDown);

@@ -14,6 +14,22 @@ function Synth() {
     'B' : 7902.13
   }
 
+  this.keyCodes = {
+    90: 'C4',
+    83: 'C#4',
+    88: 'D4',
+    68: 'D#4',
+    67: 'E4',
+    86: 'F4',
+    71: 'F#4',
+    66: 'G4',
+    72: 'G#4',
+    78: 'A4',
+    74: 'A#4',
+    77: 'B4',
+    188: 'C5'
+  }
+
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
   const oscillator1 = context.createOscillator();
@@ -24,11 +40,7 @@ function Synth() {
   oscillator1.start(0);
 
   this.play = function(keyCode) {
-    if (keyCode === 32) {
-      oscillator1.frequency.value = Math.random() * 20000
-    } else {
-      oscillator1.frequency.value = 440
-    }
+    oscillator1.frequency.value = this.getNote(this.keyCodes[keyCode])
     gain.gain.value = 1
   }
 
@@ -38,11 +50,10 @@ function Synth() {
      
   this.getNote = (noteString) => {
     let noteArray = noteString.split('')
-    let note = noteArray[0]
-    let octave = parseInt(noteArray[1], 10);
+    let octave = noteArray.pop()
+    noteString = noteArray.join()
     let transposition = octave - 8
-    let frequency = this.state.notes[note]
-    console.log(Math.abs(transposition))
+    let frequency = this.notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
       transposition > 0 ?
       frequency = frequency * 2 :
@@ -50,6 +61,10 @@ function Synth() {
     }
     const roundedFrequency = +frequency.toFixed(2)
     return roundedFrequency;
+  }
+
+  this.randomNote = () => {
+    return Math.random() * 19980 + 20
   }
 
 }
