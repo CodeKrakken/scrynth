@@ -24,6 +24,7 @@ function Synth() {
   oscillator1.start(0);
 
   this.play = function() {
+    oscillator1.frequency.value = Math.random() * 5000
     gain.gain.value = 1
   }
 
