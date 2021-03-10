@@ -23,8 +23,12 @@ function Synth() {
   gain.gain.value = 0
   oscillator1.start(0);
 
-  this.play = function() {
-    oscillator1.frequency.value = Math.random() * 5000
+  this.play = function(keyCode) {
+    if (keyCode === 32) {
+      oscillator1.frequency.value = Math.random() * 20000
+    } else {
+      oscillator1.frequency.value = 440
+    }
     gain.gain.value = 1
   }
 

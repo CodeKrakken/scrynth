@@ -6,7 +6,8 @@ function Keyboard() {
 
   useEffect(() => {
     function handleKeyDown(e) {
-      synth.play(e)
+      synth.play(e.keyCode)
+      console.log(e.keyCode)
     }
 
     function handleKeyUp(e) {
