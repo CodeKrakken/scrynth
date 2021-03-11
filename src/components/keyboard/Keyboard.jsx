@@ -32,10 +32,13 @@ function Keyboard() {
     57: 9,
     48: 10
   }
+  
+  let currentNoteCodes = []
 
   function handleKeyDown(e) {
     console.log(e)
     if (e.keyCode in noteCodes) {
+      currentNoteCodes.push(e.keyCode)
       synth.play(noteCodes[e.keyCode])
     }
 
@@ -44,8 +47,10 @@ function Keyboard() {
     }
   }
 
-  function handleKeyUp() {
-    synth.stop()
+  function handleKeyUp(e) {
+    if (currentNoteCodes.includes(e.keyCode)) {
+      synth.stop(e.keyCode)
+    }
   }
 
   document.addEventListener('keydown', handleKeyDown);
