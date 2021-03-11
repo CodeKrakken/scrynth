@@ -18,28 +18,26 @@ function Synth() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
   const oscillator1 = context.createOscillator();
-  const gain = context.createGain()
+  const gain1 = context.createGain()
   let octave = 4
   let currentNote
-  oscillator1.connect(gain);
-  gain.connect(context.destination);
-  gain.gain.value = 0
+  oscillator1.connect(gain1);
+  gain1.connect(context.destination);
+  gain1.gain.value = 0
   oscillator1.start(0);
+  console.log(oscillator1)
 
   this.play = function(note) {
     currentNote = note
     oscillator1.frequency.value = this.getNote(note)
-    gain.gain.value = 1
+    gain1.gain.value = 1
   }
 
   this.stop = function() {
-    gain.gain.value = 0
+    gain1.gain.value = 0
   }
      
   this.getNote = (noteString) => {
-    // let noteArray = noteString.split('')
-    // let octave = noteArray.pop()
-    // noteString = noteArray.join('')
     let transposition = octave - 8
     let frequency = this.notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
@@ -53,7 +51,9 @@ function Synth() {
 
   this.octave = (targetOctave) => {
     octave = targetOctave
-    this.play(currentNote)
+    if (gain1.gain.value > 0) {
+      this.play(currentNote)
+    }
   }
 
   this.randomNote = () => {
