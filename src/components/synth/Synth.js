@@ -20,12 +20,14 @@ function Synth() {
   const oscillator1 = context.createOscillator();
   const gain = context.createGain()
   let octave = 4
+  let currentNote
   oscillator1.connect(gain);
   gain.connect(context.destination);
   gain.gain.value = 0
   oscillator1.start(0);
 
   this.play = function(note) {
+    currentNote = note
     oscillator1.frequency.value = this.getNote(note)
     gain.gain.value = 1
   }
@@ -51,6 +53,7 @@ function Synth() {
 
   this.octave = (targetOctave) => {
     octave = targetOctave
+    this.play(currentNote)
   }
 
   this.randomNote = () => {
