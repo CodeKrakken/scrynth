@@ -18,6 +18,7 @@ function Synth() {
   const context = new AudioContext();
   const oscillator1 = context.createOscillator();
   const gain = context.createGain()
+  const octave = 4
   oscillator1.connect(gain);
   gain.connect(context.destination);
   gain.gain.value = 0
@@ -33,9 +34,9 @@ function Synth() {
   }
      
   this.getNote = (noteString) => {
-    let noteArray = noteString.split('')
-    let octave = noteArray.pop()
-    noteString = noteArray.join('')
+    // let noteArray = noteString.split('')
+    // let octave = noteArray.pop()
+    // noteString = noteArray.join('')
     let transposition = octave - 8
     let frequency = this.notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
@@ -45,6 +46,10 @@ function Synth() {
     }
     const roundedFrequency = +frequency.toFixed(2)
     return roundedFrequency;
+  }
+
+  this.octave = (targetOctave) => {
+
   }
 
   this.randomNote = () => {
