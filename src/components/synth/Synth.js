@@ -18,26 +18,44 @@ function Synth() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
   const oscillator1 = context.createOscillator();
+  const oscillator2 = context.createOscillator();
   const gain1 = context.createGain()
+  const gain2 = context.createGain()
   let octave = 4
-  let currentNote
+  let currentNotes = []
   oscillator1.connect(gain1);
+  oscillator2.connect(gain2);
   gain1.connect(context.destination);
+  gain2.connect(context.destination);
   gain1.gain.value = 0
+  gain2.gain.value = 0
   oscillator1.start(0);
-  console.log(oscillator1)
+  oscillator2.start(0);
+  let oscillators = [
+    [oscillator1, gain1], 
+    [oscillator2, gain2]
+  ]
+  let availableOscillator
+  let currentFrequencies = []
 
   this.play = function(note) {
-    currentNote = note
-    oscillator1.frequency.value = this.getNote(note)
-    gain1.gain.value = 1
+    availableOscillator = oscillators.find(function (oscGain) {
+      return oscGain[1].gain.value === 0;
+    });
+    let frequency = this.getFrequency(note)
+    availableOscillator[0].frequency.value = frequency
+    currentFrequencies.push(frequency)
+    availableOscillator[1].gain.value = 1
   }
 
-  this.stop = function() {
-    gain1.gain.value = 0
+  this.stop = function(note) {
+    let oscillatorToStop = oscillators.find(function (oscGain) {
+      return oscGain[0].frequency.value === this.getFrequency(note)
+    })
+    oscillatorToStop[1].gain.value = 0
   }
      
-  this.getNote = (noteString) => {
+  this.getFrequency = (noteString) => {
     let transposition = octave - 8
     let frequency = this.notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
@@ -52,7 +70,9 @@ function Synth() {
   this.octave = (targetOctave) => {
     octave = targetOctave
     if (gain1.gain.value > 0) {
-      this.play(currentNote)
+      currentNotes.forEach(note => {
+        this.play(note)
+      })
     }
   }
 

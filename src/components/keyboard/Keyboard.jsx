@@ -49,7 +49,7 @@ function Keyboard() {
 
   function handleKeyUp(e) {
     if (currentNoteCodes.includes(e.keyCode)) {
-      synth.stop(e.keyCode)
+      synth.stop(noteCodes[e.keyCode])
     }
   }
 
