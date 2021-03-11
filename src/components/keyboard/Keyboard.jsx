@@ -16,7 +16,7 @@ function Keyboard() {
     78: 'A',
     74: 'A#',
     77: 'B',
-    188: 'C'
+    188: 'C+'
   }
 
   const octaveCodes = {

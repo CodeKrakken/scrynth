@@ -11,7 +11,8 @@ function Synth() {
     'G#': 6644.88,
     'A' : 7040.00,
     'A#': 7458.62,
-    'B' : 7902.13
+    'B' : 7902.13,
+    'C+': 8372.02
   }
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
