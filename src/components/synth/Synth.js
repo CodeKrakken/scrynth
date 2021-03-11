@@ -14,22 +14,6 @@ function Synth() {
     'B' : 7902.13
   }
 
-  this.keyCodes = {
-    90: 'C4',
-    83: 'C#4',
-    88: 'D4',
-    68: 'D#4',
-    67: 'E4',
-    86: 'F4',
-    71: 'F#4',
-    66: 'G4',
-    72: 'G#4',
-    78: 'A4',
-    74: 'A#4',
-    77: 'B4',
-    188: 'C5'
-  }
-
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
   const oscillator1 = context.createOscillator();
@@ -39,11 +23,9 @@ function Synth() {
   gain.gain.value = 0
   oscillator1.start(0);
 
-  this.play = function(keyCode) {
-    if (keyCode in this.keyCodes) {
-      oscillator1.frequency.value = this.getNote(this.keyCodes[keyCode])
-      gain.gain.value = 1
-    }
+  this.play = function(note) {
+    oscillator1.frequency.value = this.getNote(note)
+    gain.gain.value = 1
   }
 
   this.stop = function() {
@@ -54,7 +36,6 @@ function Synth() {
     let noteArray = noteString.split('')
     let octave = noteArray.pop()
     noteString = noteArray.join('')
-    console.log(noteString)
     let transposition = octave - 8
     let frequency = this.notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
