@@ -18,7 +18,7 @@ function Synth() {
   const context = new AudioContext();
   const oscillator1 = context.createOscillator();
   const gain = context.createGain()
-  const octave = 4
+  let octave = 4
   oscillator1.connect(gain);
   gain.connect(context.destination);
   gain.gain.value = 0
@@ -49,7 +49,7 @@ function Synth() {
   }
 
   this.octave = (targetOctave) => {
-
+    octave = targetOctave
   }
 
   this.randomNote = () => {
