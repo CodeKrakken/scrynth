@@ -28,32 +28,34 @@ function Synth() {
   gain2.connect(context.destination);
   gain1.gain.value = 0
   gain2.gain.value = 0
-  const oscillators = [
+  let oscillators = [
     { 'oscillator': oscillator1,
       'gain': gain1,
       'note': undefined
-    }, {
-
-  }
-    [oscillator2, gain2]
+    }, 
+    {
+      'oscillator': oscillator2,
+      'gain': gain2,
+      'note': undefined
+    }
   ]
   oscillator1.start(0);
   oscillator2.start(0);
 
   this.play = function(note) {
-    let nextOscillator = oscillators.find(oscillator => oscillator.length === 2)
-    if (nextOscillator !== undefined) {
-      nextOscillator[0].frequency.value = this.getFrequency(note)
-      nextOscillator.push(note)
-      nextOscillator[1].gain.value = 1
+    let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === undefined)
+    if (nextOscillatorIndex !== -1) {
+      oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
+      oscillators[nextOscillatorIndex].note = note
+      oscillators[nextOscillatorIndex].gain.gain.value = 1
     }
   }
 
   this.stop = function(noteToStop) {
-    let indexToStop = oscillators.findIndex((oscillator) => oscillator[2] === noteToStop)
-    console.log(indexToStop)
-    oscillators[indexToStop][1].gain.value = 0
-    oscillators[indexToStop].pop()
+    console.log(oscillators[0])
+    let oscillatorToStopIndex = oscillators.findIndex(oscillator => oscillator.note === noteToStop)
+    oscillators[oscillatorToStopIndex].gain.value = 0
+    oscillators[oscillatorToStopIndex].note = undefined
   }
      
   this.getFrequency = (noteString) => {
