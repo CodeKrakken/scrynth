@@ -17,42 +17,43 @@ function Synth() {
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
+  let octave = 4
   const oscillator1 = context.createOscillator();
   const oscillator2 = context.createOscillator();
   const gain1 = context.createGain()
   const gain2 = context.createGain()
-  let octave = 4
-  let currentNotes = []
   oscillator1.connect(gain1);
   oscillator2.connect(gain2);
   gain1.connect(context.destination);
   gain2.connect(context.destination);
   gain1.gain.value = 0
   gain2.gain.value = 0
-  oscillator1.start(0);
-  oscillator2.start(0);
-  let oscillators = [
-    [oscillator1, gain1], 
+  const oscillators = [
+    { 'oscillator': oscillator1,
+      'gain': gain1,
+      'note': undefined
+    }, {
+
+  }
     [oscillator2, gain2]
   ]
-  let availableOscillator
-  let currentFrequencies = []
+  oscillator1.start(0);
+  oscillator2.start(0);
 
   this.play = function(note) {
-    availableOscillator = oscillators.find(function (oscGain) {
-      return oscGain[1].gain.value === 0;
-    });
-    let frequency = this.getFrequency(note)
-    availableOscillator[0].frequency.value = frequency
-    currentFrequencies.push(frequency)
-    availableOscillator[1].gain.value = 1
+    let nextOscillator = oscillators.find(oscillator => oscillator.length === 2)
+    if (nextOscillator !== undefined) {
+      nextOscillator[0].frequency.value = this.getFrequency(note)
+      nextOscillator.push(note)
+      nextOscillator[1].gain.value = 1
+    }
   }
 
-  this.stop = function(note) {
-    let oscillatorToStop = oscillators.find(function (oscGain) {
-      return oscGain[0].frequency.value === this.getFrequency(note)
-    })
-    oscillatorToStop[1].gain.value = 0
+  this.stop = function(noteToStop) {
+    let indexToStop = oscillators.findIndex((oscillator) => oscillator[2] === noteToStop)
+    console.log(indexToStop)
+    oscillators[indexToStop][1].gain.value = 0
+    oscillators[indexToStop].pop()
   }
      
   this.getFrequency = (noteString) => {
@@ -69,11 +70,11 @@ function Synth() {
 
   this.octave = (targetOctave) => {
     octave = targetOctave
-    if (gain1.gain.value > 0) {
-      currentNotes.forEach(note => {
-        this.play(note)
-      })
-    }
+    oscillators.forEach(oscillator => {
+      if(oscillator[1].gain.value === 1) {
+        this.play(oscillator[2])
+      }
+    })
   }
 
   this.randomNote = () => {

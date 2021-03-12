@@ -36,7 +36,6 @@ function Keyboard() {
   let currentNoteCodes = []
 
   function handleKeyDown(e) {
-    console.log(e)
     if (e.keyCode in noteCodes) {
       currentNoteCodes.push(e.keyCode)
       synth.play(noteCodes[e.keyCode])
