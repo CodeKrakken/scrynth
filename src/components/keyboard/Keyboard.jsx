@@ -1,5 +1,7 @@
 import React from "react";
 import Synth from '../synth/Synth';
+import './keyboard.css'
+
 const synth = new Synth()
 
 function Keyboard() {
@@ -55,8 +57,154 @@ function Keyboard() {
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
 
-  return <div>KEYBOARD</div>;
-
+  return (
+    <div id="keyboard">
+      <div className="keyboard-row">
+        <span className="circle-outer">
+          <span className="circle-inner">
+            `
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            1
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            2
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            3
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            4
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            5
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            6
+          </span>
+        </span>        
+        <span className="circle-outer">
+          <span className="circle-inner">
+            7
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            8
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            9
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            0
+          </span>
+        </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
+      </div>
+      <div className="keyboard-row">
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
+      </div>
+      <div className="keyboard-row">
+        <span className="circle-outer">
+          <span className="circle-inner">
+            S
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            D
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            G
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            H
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            J
+          </span>
+        </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
+      </div>
+      <div className="keyboard-row">
+        <span className="circle-outer">
+          <span className="circle-inner">
+            Z
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            X
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            C
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            V
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            B
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            N
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            M
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            ,
+          </span>
+        </span>
+      </div>
+    </div>
+  )
 }
 
 export default Keyboard

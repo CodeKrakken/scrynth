@@ -5,6 +5,9 @@ function App() {
   
   return (
     <div>
+      <div className="header">
+        scrynth
+      </div>
       <Keyboard />
     </div>
   );
