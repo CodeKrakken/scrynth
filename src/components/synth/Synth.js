@@ -191,8 +191,8 @@ function Synth() {
   this.octave = (targetOctave) => {
     octave = targetOctave
     oscillators.forEach(oscillator => {
-      if(oscillator[1].gain.value === 1) {
-        this.play(oscillator[2])
+      if(oscillator.gain.gain.value > 0) {
+        this.play(oscillator.note)
       }
     })
   }
