@@ -18,44 +18,162 @@ function Synth() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
   let octave = 4
-  const oscillator1 = context.createOscillator();
-  const oscillator2 = context.createOscillator();
-  const gain1 = context.createGain()
-  const gain2 = context.createGain()
-  oscillator1.connect(gain1);
-  oscillator2.connect(gain2);
-  gain1.connect(context.destination);
-  gain2.connect(context.destination);
-  gain1.gain.value = 0
-  gain2.gain.value = 0
+  const oscillator10 = context.createOscillator();
+  const oscillator15 = context.createOscillator();
+  const oscillator20 = context.createOscillator();
+  const oscillator25 = context.createOscillator();
+  const oscillator30 = context.createOscillator();
+  const oscillator40 = context.createOscillator();
+  const oscillator45 = context.createOscillator();
+  const oscillator50 = context.createOscillator();
+  const oscillator55 = context.createOscillator();
+  const oscillator60 = context.createOscillator();
+  const oscillator65 = context.createOscillator();
+  const oscillator70 = context.createOscillator();
+  const oscillator80 = context.createOscillator();
+  const gain10 = context.createGain()
+  const gain15 = context.createGain()
+  const gain20 = context.createGain()
+  const gain25 = context.createGain()
+  const gain30 = context.createGain()
+  const gain40 = context.createGain()
+  const gain45 = context.createGain()
+  const gain50 = context.createGain()
+  const gain55 = context.createGain()
+  const gain60 = context.createGain()
+  const gain65 = context.createGain()
+  const gain70 = context.createGain()
+  const gain80 = context.createGain()
+  oscillator10.connect(gain10);
+  oscillator15.connect(gain15);
+  oscillator20.connect(gain20);
+  oscillator25.connect(gain25);
+  oscillator30.connect(gain30);
+  oscillator40.connect(gain40);
+  oscillator45.connect(gain45);
+  oscillator50.connect(gain50);
+  oscillator55.connect(gain55);
+  oscillator60.connect(gain60);
+  oscillator65.connect(gain65);
+  oscillator70.connect(gain70);
+  oscillator80.connect(gain80);
+  gain10.connect(context.destination);
+  gain15.connect(context.destination);
+  gain20.connect(context.destination);
+  gain25.connect(context.destination);
+  gain30.connect(context.destination);
+  gain40.connect(context.destination);
+  gain45.connect(context.destination);
+  gain50.connect(context.destination);
+  gain55.connect(context.destination);
+  gain60.connect(context.destination);
+  gain65.connect(context.destination);
+  gain70.connect(context.destination);
+  gain80.connect(context.destination);
+  gain10.gain.value = 0
+  gain15.gain.value = 0
+  gain20.gain.value = 0
+  gain25.gain.value = 0
+  gain30.gain.value = 0
+  gain40.gain.value = 0
+  gain45.gain.value = 0
+  gain50.gain.value = 0
+  gain55.gain.value = 0
+  gain60.gain.value = 0
+  gain65.gain.value = 0
+  gain70.gain.value = 0
+  gain80.gain.value = 0
   let oscillators = [
-    { 'oscillator': oscillator1,
-      'gain': gain1,
-      'note': undefined
+    { 'oscillator': oscillator10,
+      'gain': gain10,
+      'note': 'C'
     }, 
     {
-      'oscillator': oscillator2,
-      'gain': gain2,
-      'note': undefined
+      'oscillator': oscillator15,
+      'gain': gain15,
+      'note': 'C#'
+    },
+    {
+      'oscillator': oscillator20,
+      'gain': gain20,
+      'note': 'D'
+    },
+    {
+      'oscillator': oscillator25,
+      'gain': gain25,
+      'note': 'D#'
+    },
+    {
+      'oscillator': oscillator30,
+      'gain': gain30,
+      'note': 'E'
+    },
+    {
+      'oscillator': oscillator40,
+      'gain': gain40,
+      'note': 'F'
+    },
+    {
+      'oscillator': oscillator45,
+      'gain': gain45,
+      'note': 'F#'
+    },
+    {
+      'oscillator': oscillator50,
+      'gain': gain50,
+      'note': 'G'
+    },
+    {
+      'oscillator': oscillator55,
+      'gain': gain55,
+      'note': 'G#'
+    },
+    {
+      'oscillator': oscillator60,
+      'gain': gain60,
+      'note': 'A'
+    },
+    {
+      'oscillator': oscillator65,
+      'gain': gain65,
+      'note': 'A#'
+    },
+    {
+      'oscillator': oscillator70,
+      'gain': gain70,
+      'note': 'B'
+    },
+    {
+      'oscillator': oscillator80,
+      'gain': gain80,
+      'note': 'C+'
     }
   ]
-  oscillator1.start(0);
-  oscillator2.start(0);
+  oscillator10.start(0);
+  oscillator15.start(0);
+  oscillator20.start(0);
+  oscillator25.start(0);
+  oscillator30.start(0);
+  oscillator40.start(0);
+  oscillator45.start(0);
+  oscillator50.start(0);
+  oscillator55.start(0);
+  oscillator60.start(0);
+  oscillator65.start(0);
+  oscillator70.start(0);
+  oscillator80.start(0);
 
   this.play = function(note) {
-    let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === undefined)
-    if (nextOscillatorIndex !== -1) {
-      oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
-      oscillators[nextOscillatorIndex].note = note
-      oscillators[nextOscillatorIndex].gain.gain.value = 1
-    }
+    let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === note)
+    oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
+    oscillators[nextOscillatorIndex].note = note
+    oscillators[nextOscillatorIndex].gain.gain.value = 1
   }
 
   this.stop = function(noteToStop) {
-    console.log(oscillators[0])
     let oscillatorToStopIndex = oscillators.findIndex(oscillator => oscillator.note === noteToStop)
-    oscillators[oscillatorToStopIndex].gain.value = 0
-    oscillators[oscillatorToStopIndex].note = undefined
+    console.log(oscillatorToStopIndex)
+    oscillators[oscillatorToStopIndex].gain.gain.value = 0
   }
      
   this.getFrequency = (noteString) => {
