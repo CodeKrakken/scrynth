@@ -137,6 +137,10 @@ function Keyboard() {
             D
           </span>
         </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
         <span className="circle-outer">
           <span className="circle-inner">
             G
@@ -150,10 +154,6 @@ function Keyboard() {
         <span className="circle-outer">
           <span className="circle-inner">
             J
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
           </span>
         </span>
         <span className="circle-outer invisible">
