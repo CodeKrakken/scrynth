@@ -6,19 +6,19 @@ const synth = new Synth()
 
 function Keyboard() {
   const noteCodes = {
-    90: 'C',
-    83: 'C#',
-    88: 'D',
-    68: 'D#',
-    67: 'E',
-    86: 'F',
-    71: 'F#',
-    66: 'G',
-    72: 'G#',
-    78: 'A',
-    74: 'A#',
-    77: 'B',
-    188: 'C+'
+    90: 'C', 6: 'C',
+    83: 'C#', 1: 'C#',
+    88: 'D', 7: 'D',
+    68: 'D#', 2: 'D#',
+    67: 'E', 8: 'E',
+    86: 'F', 9: 'F',
+    71: 'F#', 5: 'F#',
+    66: 'G', 11: 'G',
+    72: 'G#', 4: 'G#',
+    78: 'A', 45: 'A',
+    74: 'A#', 38: 'A#',
+    77: 'B', 46: 'B',
+    188: 'C+', 43: 'C+'
   }
 
   const octaveCodes = {
@@ -41,6 +41,7 @@ function Keyboard() {
     if (e.keyCode in noteCodes) {
       currentNoteCodes.push(e.keyCode)
       synth.play(noteCodes[e.keyCode])
+      // document.getElementById(e.keyCode)
     }
 
     if (e.keyCode in octaveCodes) {
