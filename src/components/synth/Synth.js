@@ -14,10 +14,13 @@ function Synth() {
     'B' : 7902.13,
     'C+': 8372.02
   }
-
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  let oscillators
+  let octave
+  
+  this.setup = function() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
-  let octave = 4
+  octave = 4
   const oscillator10 = context.createOscillator();
   const oscillator15 = context.createOscillator();
   const oscillator20 = context.createOscillator();
@@ -83,7 +86,7 @@ function Synth() {
   gain65.gain.value = 0
   gain70.gain.value = 0
   gain80.gain.value = 0
-  let oscillators = [
+  oscillators = [
     { 'oscillator': oscillator10,
       'gain': gain10,
       'note': 'C'
@@ -163,6 +166,7 @@ function Synth() {
   oscillator70.start(0);
   oscillator80.start(0);
 
+  }
   this.play = function(note) {
     let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === note)
     oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
@@ -201,6 +205,7 @@ function Synth() {
     return Math.random() * 19980 + 20
   }
 
+  this.setup()
 }
 
 export default Synth
