@@ -188,7 +188,7 @@ function Synth() {
     return roundedFrequency;
   }
 
-  this.octave = (targetOctave) => {
+  this.changeOctave = (targetOctave) => {
     octave = targetOctave
     oscillators.forEach(oscillator => {
       if(oscillator.gain.gain.value > 0) {

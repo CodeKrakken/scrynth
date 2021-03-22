@@ -45,7 +45,7 @@ function Keyboard() {
     }
 
     if (e.keyCode in octaveCodes) {
-      synth.octave(octaveCodes[e.keyCode])
+      synth.changeOctave(octaveCodes[e.keyCode])
     }
   }
 
