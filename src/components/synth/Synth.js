@@ -16,10 +16,11 @@ function Synth() {
   }
   let oscillators
   let octave
+  let context
   
   this.setup = function() {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
-  const context = new AudioContext();
+  context = new AudioContext();
   octave = 4
   const oscillator10 = context.createOscillator();
   const oscillator15 = context.createOscillator();
@@ -168,6 +169,7 @@ function Synth() {
 
   }
   this.play = function(note) {
+    context.resume()
     let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === note)
     oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
     oscillators[nextOscillatorIndex].note = note
