@@ -17,8 +17,10 @@ function Synth() {
   
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
-  let octave = 4
-  let waveType = 'sine'
+  const playingNotes = {
+    'octave' : 4,
+    'waveType': 'sine'
+  }
   const oscillator10 = context.createOscillator();
   const oscillator15 = context.createOscillator();
   const oscillator20 = context.createOscillator();
@@ -164,11 +166,10 @@ function Synth() {
   oscillator70.start(0);
   oscillator80.start(0);
 
-  
   this.play = function(note) {
     context.resume()
     let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === note)
-    oscillators[nextOscillatorIndex].oscillator.type = waveType
+    oscillators[nextOscillatorIndex].oscillator.type = playingNotes['waveType']
     oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
     oscillators[nextOscillatorIndex].note = note
     oscillators[nextOscillatorIndex].gain.gain.value = 1
@@ -181,7 +182,7 @@ function Synth() {
   }
      
   this.getFrequency = (noteString) => {
-    let transposition = octave - 8
+    let transposition = playingNotes['octave'] - 8
     let frequency = this.notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
       transposition > 0 ?
@@ -192,13 +193,8 @@ function Synth() {
     return roundedFrequency;
   }
 
-  this.changeOctave = (targetOctave) => {
-    octave = targetOctave
-    this.changePlayingNotes()
-  }
-
-  this.changeWave = (targetWaveType) => {
-    waveType = targetWaveType
+  this.changeAttribute = (targetAttribute, targetValue) => {
+    playingNotes[targetAttribute] = targetValue
     this.changePlayingNotes()
   }
 
@@ -209,6 +205,7 @@ function Synth() {
       }
     })
   }
+
   this.randomNote = () => {
     return Math.random() * 19980 + 20
   }

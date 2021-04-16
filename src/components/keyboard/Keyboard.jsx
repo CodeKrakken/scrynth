@@ -50,11 +50,11 @@ function Keyboard() {
     }
 
     if (e.keyCode in octaveCodes) {
-      synth.changeOctave(octaveCodes[e.keyCode])
+      synth.changeAttribute('octave', octaveCodes[e.keyCode])
     }
 
     if (e.keyCode in waveCodes) {
-      synth.changeWave(waveCodes[e.keyCode])
+      synth.changeAttribute('waveType', waveCodes[e.keyCode])
     }
   }
 
