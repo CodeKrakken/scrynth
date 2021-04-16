@@ -34,6 +34,11 @@ function Keyboard() {
     57: 9,
     48: 10
   }
+
+  const waveCodes = { 81: 'sine',
+                      87: 'triangle',
+                      69: 'square',
+                      82: 'sawtooth' }
   
   let currentNoteCodes = []
 
@@ -46,6 +51,10 @@ function Keyboard() {
 
     if (e.keyCode in octaveCodes) {
       synth.changeOctave(octaveCodes[e.keyCode])
+    }
+
+    if (e.keyCode in waveCodes) {
+      synth.changeWave(waveCodes[e.keyCode])
     }
   }
 

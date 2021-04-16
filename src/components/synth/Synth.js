@@ -18,6 +18,7 @@ function Synth() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
   let octave = 4
+  let waveType = 'sine'
   const oscillator10 = context.createOscillator();
   const oscillator15 = context.createOscillator();
   const oscillator20 = context.createOscillator();
@@ -167,14 +168,15 @@ function Synth() {
   this.play = function(note) {
     context.resume()
     let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === note)
+    oscillators[nextOscillatorIndex].oscillator.type = waveType
     oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
     oscillators[nextOscillatorIndex].note = note
     oscillators[nextOscillatorIndex].gain.gain.value = 1
+    console.log(oscillators[nextOscillatorIndex])
   }
 
   this.stop = function(noteToStop) {
     let oscillatorToStopIndex = oscillators.findIndex(oscillator => oscillator.note === noteToStop)
-    console.log(oscillatorToStopIndex)
     oscillators[oscillatorToStopIndex].gain.gain.value = 0
   }
      
@@ -199,6 +201,14 @@ function Synth() {
     })
   }
 
+  this.changeWave = (targetWaveType) => {
+    waveType = targetWaveType
+    oscillators.forEach(oscillator => {
+      if(oscillator.gain.gain.value > 0) {
+        this.play(oscillator.note)
+      }
+    })
+  }
   this.randomNote = () => {
     return Math.random() * 19980 + 20
   }
