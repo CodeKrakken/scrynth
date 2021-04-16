@@ -171,7 +171,6 @@ function Synth() {
     let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === note)
     oscillators[nextOscillatorIndex].oscillator.type = playingNotes['waveType']
     oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
-    oscillators[nextOscillatorIndex].note = note
     oscillators[nextOscillatorIndex].gain.gain.value = 1
     console.log(oscillators[nextOscillatorIndex])
   }
