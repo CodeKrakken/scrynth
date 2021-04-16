@@ -131,6 +131,42 @@ function Keyboard() {
         </span>
       </div>
       <div className="keyboard-row">
+        <span className="circle-outer">
+          <span className="circle-inner">
+            Q
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            W
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            E
+          </span>
+        </span>
+        <span className="circle-outer">
+          <span className="circle-inner">
+            R
+          </span>
+        </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
+        <span className="circle-outer invisible">
+          <span className="circle-inner">
+          </span>
+        </span>
         <span className="circle-outer invisible">
           <span className="circle-inner">
           </span>
