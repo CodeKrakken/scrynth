@@ -42,7 +42,7 @@ function Keyboard() {
   
   let currentNoteCodes = []
 
-  function handleStart(e) {
+  function handleKeyDown(e) {
     if (e.keyCode in noteCodes) {
       currentNoteCodes.push(e.keyCode)
       synth.play(noteCodes[e.keyCode])
@@ -58,16 +58,15 @@ function Keyboard() {
     }
   }
 
-  function handleEnd(e) {
+  function handleKeyUp(e) {
     if (currentNoteCodes.includes(e.keyCode)) {
       synth.stop(noteCodes[e.keyCode])
     }
   }
 
-  document.addEventListener('keydown', handleStart);
-  document.addEventListener('keyup', handleEnd);
-  document.addEventListener('touchstart', handleStart);
-  document.addEventListener('touchend', handleEnd)
+
+  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener('keyup', handleKeyUp);
 
   return (
     <div id="keyboard">
@@ -211,9 +210,9 @@ function Keyboard() {
       </div>
       <div className="keyboard-row">
         <span className="circle-outer">
-          <span className="circle-inner">
+          <button onClick={(e) => console.log(e)} className="circle-inner">
             Z
-          </span>
+          </button>
         </span>
         <span className="circle-outer">
           <span className="circle-inner">
