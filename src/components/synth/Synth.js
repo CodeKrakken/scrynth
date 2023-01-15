@@ -105,65 +105,23 @@ export default function Synth() {
 
   keys.forEach(key => {
     key.oscillator.connect(key.gain)
-    // gain.connect(context.destination)
-    // gain.gain.value = 0
+    key.gain.connect(context.destination)
+    key.gain.gain.value = 0
   })
-
-  // const oscillator10 = context.createOscillator();
-  // const oscillator15 = context.createOscillator();
-  // const oscillator20 = context.createOscillator();
-  // const oscillator25 = context.createOscillator();
-  // const oscillator30 = context.createOscillator();
-  // const oscillator40 = context.createOscillator();
-  // const oscillator45 = context.createOscillator();
-  // const oscillator50 = context.createOscillator();
-  // const oscillator55 = context.createOscillator();
-  // const oscillator60 = context.createOscillator();
-  // const oscillator65 = context.createOscillator();
-  // const oscillator70 = context.createOscillator();
-  // const oscillator80 = context.createOscillator();
   
-  // oscillator10.connect(gain10);
-  // oscillator15.connect(gain15);
-  // oscillator20.connect(gain20);
-  // oscillator25.connect(gain25);
-  // oscillator30.connect(gain30);
-  // oscillator40.connect(gain40);
-  // oscillator45.connect(gain45);
-  // oscillator50.connect(gain50);
-  // oscillator55.connect(gain55);
-  // oscillator60.connect(gain60);
-  // oscillator65.connect(gain65);
-  // oscillator70.connect(gain70);
-  // oscillator80.connect(gain80);
-
-  gain10.connect(context.destination);
-  gain15.connect(context.destination);
-  gain20.connect(context.destination);
-  gain25.connect(context.destination);
-  gain30.connect(context.destination);
-  gain40.connect(context.destination);
-  gain45.connect(context.destination);
-  gain50.connect(context.destination);
-  gain55.connect(context.destination);
-  gain60.connect(context.destination);
-  gain65.connect(context.destination);
-  gain70.connect(context.destination);
-  gain80.connect(context.destination);
-
-  gain10.gain.value = 0
-  gain15.gain.value = 0
-  gain20.gain.value = 0
-  gain25.gain.value = 0
-  gain30.gain.value = 0
-  gain40.gain.value = 0
-  gain45.gain.value = 0
-  gain50.gain.value = 0
-  gain55.gain.value = 0
-  gain60.gain.value = 0
-  gain65.gain.value = 0
-  gain70.gain.value = 0
-  gain80.gain.value = 0
+  // gain10.gain.value = 0
+  // gain15.gain.value = 0
+  // gain20.gain.value = 0
+  // gain25.gain.value = 0
+  // gain30.gain.value = 0
+  // gain40.gain.value = 0
+  // gain45.gain.value = 0
+  // gain50.gain.value = 0
+  // gain55.gain.value = 0
+  // gain60.gain.value = 0
+  // gain65.gain.value = 0
+  // gain70.gain.value = 0
+  // gain80.gain.value = 0
 
   keys.forEach(key => {
     key.oscillator.start(0)
