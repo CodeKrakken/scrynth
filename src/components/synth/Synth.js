@@ -20,19 +20,7 @@ export default function Synth() {
     'octave' : 4,
     'waveType': 'sine'
   }
-  const oscillator10 = context.createOscillator();
-  const oscillator15 = context.createOscillator();
-  const oscillator20 = context.createOscillator();
-  const oscillator25 = context.createOscillator();
-  const oscillator30 = context.createOscillator();
-  const oscillator40 = context.createOscillator();
-  const oscillator45 = context.createOscillator();
-  const oscillator50 = context.createOscillator();
-  const oscillator55 = context.createOscillator();
-  const oscillator60 = context.createOscillator();
-  const oscillator65 = context.createOscillator();
-  const oscillator70 = context.createOscillator();
-  const oscillator80 = context.createOscillator();
+
   const gain10 = context.createGain()
   const gain15 = context.createGain()
   const gain20 = context.createGain()
@@ -47,20 +35,108 @@ export default function Synth() {
   const gain70 = context.createGain()
   const gain80 = context.createGain()
 
+  let keys = [
+    { 
+      'oscillator': context.createOscillator(),
+      'gain': gain10,
+      'note': 'C'
+    }, 
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain15,
+      'note': 'C#'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain20,
+      'note': 'D'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain25,
+      'note': 'D#'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain30,
+      'note': 'E'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain40,
+      'note': 'F'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain45,
+      'note': 'F#'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain50,
+      'note': 'G'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain55,
+      'note': 'G#'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain60,
+      'note': 'A'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain65,
+      'note': 'A#'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain70,
+      'note': 'B'
+    },
+    {
+      'oscillator': context.createOscillator(),
+      'gain': gain80,
+      'note': 'C+'
+    }
+  ]
 
-  oscillator10.connect(gain10);
-  oscillator15.connect(gain15);
-  oscillator20.connect(gain20);
-  oscillator25.connect(gain25);
-  oscillator30.connect(gain30);
-  oscillator40.connect(gain40);
-  oscillator45.connect(gain45);
-  oscillator50.connect(gain50);
-  oscillator55.connect(gain55);
-  oscillator60.connect(gain60);
-  oscillator65.connect(gain65);
-  oscillator70.connect(gain70);
-  oscillator80.connect(gain80);
+  keys.forEach(key => {
+    key.oscillator.connect(key.gain)
+    // gain.connect(context.destination)
+    // gain.gain.value = 0
+  })
+
+  // const oscillator10 = context.createOscillator();
+  // const oscillator15 = context.createOscillator();
+  // const oscillator20 = context.createOscillator();
+  // const oscillator25 = context.createOscillator();
+  // const oscillator30 = context.createOscillator();
+  // const oscillator40 = context.createOscillator();
+  // const oscillator45 = context.createOscillator();
+  // const oscillator50 = context.createOscillator();
+  // const oscillator55 = context.createOscillator();
+  // const oscillator60 = context.createOscillator();
+  // const oscillator65 = context.createOscillator();
+  // const oscillator70 = context.createOscillator();
+  // const oscillator80 = context.createOscillator();
+  
+  // oscillator10.connect(gain10);
+  // oscillator15.connect(gain15);
+  // oscillator20.connect(gain20);
+  // oscillator25.connect(gain25);
+  // oscillator30.connect(gain30);
+  // oscillator40.connect(gain40);
+  // oscillator45.connect(gain45);
+  // oscillator50.connect(gain50);
+  // oscillator55.connect(gain55);
+  // oscillator60.connect(gain60);
+  // oscillator65.connect(gain65);
+  // oscillator70.connect(gain70);
+  // oscillator80.connect(gain80);
+
   gain10.connect(context.destination);
   gain15.connect(context.destination);
   gain20.connect(context.destination);
@@ -74,6 +150,7 @@ export default function Synth() {
   gain65.connect(context.destination);
   gain70.connect(context.destination);
   gain80.connect(context.destination);
+
   gain10.gain.value = 0
   gain15.gain.value = 0
   gain20.gain.value = 0
@@ -87,73 +164,6 @@ export default function Synth() {
   gain65.gain.value = 0
   gain70.gain.value = 0
   gain80.gain.value = 0
-
-  let keys = [
-    { 'oscillator': oscillator10,
-      'gain': gain10,
-      'note': 'C'
-    }, 
-    {
-      'oscillator': oscillator15,
-      'gain': gain15,
-      'note': 'C#'
-    },
-    {
-      'oscillator': oscillator20,
-      'gain': gain20,
-      'note': 'D'
-    },
-    {
-      'oscillator': oscillator25,
-      'gain': gain25,
-      'note': 'D#'
-    },
-    {
-      'oscillator': oscillator30,
-      'gain': gain30,
-      'note': 'E'
-    },
-    {
-      'oscillator': oscillator40,
-      'gain': gain40,
-      'note': 'F'
-    },
-    {
-      'oscillator': oscillator45,
-      'gain': gain45,
-      'note': 'F#'
-    },
-    {
-      'oscillator': oscillator50,
-      'gain': gain50,
-      'note': 'G'
-    },
-    {
-      'oscillator': oscillator55,
-      'gain': gain55,
-      'note': 'G#'
-    },
-    {
-      'oscillator': oscillator60,
-      'gain': gain60,
-      'note': 'A'
-    },
-    {
-      'oscillator': oscillator65,
-      'gain': gain65,
-      'note': 'A#'
-    },
-    {
-      'oscillator': oscillator70,
-      'gain': gain70,
-      'note': 'B'
-    },
-    {
-      'oscillator': oscillator80,
-      'gain': gain80,
-      'note': 'C+'
-    }
-  ]
 
   keys.forEach(key => {
     key.oscillator.start(0)
