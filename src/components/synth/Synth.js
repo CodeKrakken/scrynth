@@ -29,8 +29,6 @@ export default function Synth() {
 
     return key
   }))
-
-  console.log(keys)
     
   this.play = (note) => {
     const i = keys.findIndex(key => key.note === note)
