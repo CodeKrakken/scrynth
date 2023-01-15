@@ -1,5 +1,7 @@
 export default function Synth() {
-  
+
+  const context = new AudioContext();
+
   const notes = {
     'C' : 4186.01,
     'C#': 4434.92,
@@ -15,81 +17,19 @@ export default function Synth() {
     'B' : 7902.13,
     'C+': 8372.02
   }
-  
-  const context = new AudioContext();
 
+  const keys = Object.keys(notes).map(note => {
+    return {
+      oscillator: context.createOscillator(),
+      gain: context.createGain(),
+      note: note
+    }
+  })
+  
   const playingNotes = {
     'octave' : 4,
     'waveType': 'sine'
   }
-
-  let keys = [
-    { 
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'C'
-    }, 
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'C#'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'D'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'D#'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'E'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'F'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'F#'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'G'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'G#'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'A'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'A#'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'B'
-    },
-    {
-      'oscillator': context.createOscillator(),
-      'gain': context.createGain(),
-      'note': 'C+'
-    }
-  ]
 
   keys.forEach(key => {
     key.oscillator.connect(key.gain)
