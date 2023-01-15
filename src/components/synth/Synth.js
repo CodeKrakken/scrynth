@@ -3,9 +3,8 @@ export default function Synth() {
   const context = new AudioContext();
   context.resume()
 
-
   const playingNotes = {
-    octave : 4,
+    octave  : 4,
     waveType: 'sine'
   }
 
@@ -26,20 +25,21 @@ export default function Synth() {
   }
 
   const keys = Object.keys(notes).map(note => {
-    return {
+
+    const key = {
       oscillator: context.createOscillator(),
       gain: context.createGain(),
       note: note
     }
-  })
-  
-  keys.forEach(key => {
+
     key.oscillator.connect(key.gain)
     key.gain.connect(context.destination)
     key.gain.gain.value = 0
     key.oscillator.start(0)
+
+    return key
   })
-  
+    
   this.play = (note) => {
     let nextOscillatorIndex = keys.findIndex(oscillator => oscillator.note === note)
     keys[nextOscillatorIndex].oscillator.type = playingNotes['waveType']
