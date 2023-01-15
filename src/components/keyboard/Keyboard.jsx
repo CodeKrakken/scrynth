@@ -20,8 +20,8 @@ export default function Keyboard() {
     waveShapes   :  { 
       81: 'sine',
       87: 'triangle',
-      69: 'square',
-      82: 'sawtooth' 
+      69: 'sawtooth', 
+      82: 'square'
     }
   }
   
