@@ -39,7 +39,6 @@ function Boombox() {
 
 //   // play pause audio
   function play() {
-    console.log('hello')
     if(!audioCtx) {
       init();
     }

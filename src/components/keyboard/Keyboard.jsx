@@ -21,24 +21,14 @@ function Keyboard() {
     188: 'C+', 43: 'C+'
   }
 
-  const octaveCodes = {
-    192: 0,
-    49: 1,
-    50: 2,
-    51: 3,
-    52: 4,
-    53: 5,
-    54: 6,
-    55: 7,
-    56: 8,
-    57: 9,
-    48: 10
-  }
+  const octaveCodes = [192, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48]
 
-  const waveCodes = { 81: 'sine',
-                      87: 'triangle',
-                      69: 'square',
-                      82: 'sawtooth' }
+  const waveCodes = { 
+    81: 'sine',
+    87: 'triangle',
+    69: 'square',
+    82: 'sawtooth' 
+  }
   
   let currentNoteCodes = []
 
@@ -49,8 +39,9 @@ function Keyboard() {
       // document.getElementById(e.keyCode)
     }
 
-    if (e.keyCode in octaveCodes) {
-      synth.changeAttribute('octave', octaveCodes[e.keyCode])
+    if (octaveCodes.includes(e.keyCode)) {
+      console.log(e.keyCode)
+      synth.changeAttribute('octave', octaveCodes.indexOf(e.keyCode))
     }
 
     if (e.keyCode in waveCodes) {
