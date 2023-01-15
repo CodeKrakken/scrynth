@@ -30,16 +30,17 @@ export default function Synth() {
     return key
   }))
     
-  this.play = (note) => {
+  this.play = (note, playingNoteCount) => {
     const i = keys.findIndex(key => key.note === note)
     keys[i].oscillator.type = settings.waveShape
     keys[i].oscillator.frequency.value = transpose(keys[i].frequency)
     console.log(transpose(keys[i].frequency))
-    keys[i].gain.gain.value = 1
+    keys[i].gain.gain.value = 1/playingNoteCount
   }
 
   this.stop = (note) => {
     const i = keys.findIndex(key => key.note === note)
+    
     keys[i].gain.gain.value = 0
   }
 
@@ -61,5 +62,4 @@ export default function Synth() {
     }
     return +frequency.toFixed(2)
   }
-
 }

@@ -25,13 +25,13 @@ export default function Keyboard() {
     }
   }
   
-  const playingNotes = []
+  let playingNotes = []
 
   function handleNoteStart(e) {
     
-    if (e.keyCode in keycodes.notes) {
+    if (e.keyCode in keycodes.notes && !playingNotes.includes(e.keyCode)) {
       playingNotes.push(e.keyCode)
-      synth.play(keycodes.notes[e.keyCode])
+      synth.play(keycodes.notes[e.keyCode], playingNotes.length)
     }
 
     if (keycodes.octaves.includes(e.keyCode)) {
@@ -45,6 +45,7 @@ export default function Keyboard() {
 
   function handleNoteEnd(e) {
     if (playingNotes.includes(e.keyCode)) {
+      playingNotes = playingNotes.filter(note => note !== e.keyCode)
       synth.stop(keycodes.notes[e.keyCode])
     }
   }
