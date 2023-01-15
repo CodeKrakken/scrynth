@@ -8,10 +8,26 @@ export default function Synth() {
     waveShape: 'sine'
   }
 
-  const ratio   = 1.0594630943592953
+  // const notes = {
+  //   'C' : 4186.01,
+  //   'C#': 4434.92,
+  //   'D' : 4698.63,
+  //   'D#': 4978.03,
+  //   'E' : 5274.04,
+  //   'F' : 5587.65,
+  //   'F#': 5919.91,
+  //   'G' : 6271.93,
+  //   'G#': 6644.88,
+  //   'A' : 7040.00,
+  //   'A#': 7458.62,
+  //   'B' : 7902.13,
+  //   'C+': 8372.02
+  // }
+
+  const ratio   = 1.05946274243760910195
   let frequency = 16.35
   let notes     = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C+']
-
+  
   const keys = notes.map(((note, i) => {
     if (i) { frequency *= ratio }
     
@@ -34,6 +50,7 @@ export default function Synth() {
     const i = keys.findIndex(key => key.note === note)
     keys[i].oscillator.type = settings.waveShape
     keys[i].oscillator.frequency.value = transpose(keys[i].frequency)
+    console.log(transpose(keys[i].frequency))
     keys[i].gain.gain.value = 1
   }
 
