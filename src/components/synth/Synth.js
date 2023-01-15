@@ -1,4 +1,4 @@
-function Synth() {
+export default function Synth() {
   this.notes = {
     'C' : 4186.01,
     'C#': 4434.92,
@@ -209,5 +209,3 @@ function Synth() {
   }
 
 }
-
-export default Synth

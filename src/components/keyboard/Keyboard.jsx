@@ -4,246 +4,78 @@ import './keyboard.css'
 
 const synth = new Synth()
 
-function Keyboard() {
-  const noteCodes = {
-    90: 'C', 6: 'C',
-    83: 'C#', 1: 'C#',
-    88: 'D', 7: 'D',
-    68: 'D#', 2: 'D#',
-    67: 'E', 8: 'E',
-    86: 'F', 9: 'F',
-    71: 'F#', 5: 'F#',
-    66: 'G', 11: 'G',
-    72: 'G#', 4: 'G#',
-    78: 'A', 45: 'A',
-    74: 'A#', 38: 'A#',
-    77: 'B', 46: 'B',
-    188: 'C+', 43: 'C+'
-  }
+export default function Keyboard() {
 
-  const octaveCodes = [192, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48]
-
-  const waveCodes = { 
-    81: 'sine',
-    87: 'triangle',
-    69: 'square',
-    82: 'sawtooth' 
+  const keycodes = {
+    notes   : {
+      90 : 'C' ,  6: 'C' ,  83 : 'C#',  1: 'C#',
+      88 : 'D' ,  7: 'D' ,  68 : 'D#',  2: 'D#',
+      67 : 'E' ,  8: 'E' ,  86 : 'F' ,  9: 'F' ,
+      71 : 'F#',  5: 'F#',  66 : 'G' , 11: 'G' ,
+      72 : 'G#',  4: 'G#',  78 : 'A' , 45: 'A' ,
+      74 : 'A#', 38: 'A#',  77 : 'B' , 46: 'B' ,
+     188 : 'C+', 43: 'C+'    
+    },
+    octaves : [192, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48],
+    waveShapes   :  { 
+      81: 'sine',
+      87: 'triangle',
+      69: 'square',
+      82: 'sawtooth' 
+    }
   }
   
-  let currentNoteCodes = []
+  const playingNotes = []
 
-  function handleStart(e) {
-    if (e.keyCode in noteCodes) {
-      currentNoteCodes.push(e.keyCode)
-      synth.play(noteCodes[e.keyCode])
-      // document.getElementById(e.keyCode)
+  function handleNoteStart(e) {
+    
+    if (e.keyCode in keycodes.notes) {
+      playingNotes.push(e.keyCode)
+      synth.play(keycodes.notes[e.keyCode])
     }
 
-    if (octaveCodes.includes(e.keyCode)) {
-      console.log(e.keyCode)
-      synth.changeAttribute('octave', octaveCodes.indexOf(e.keyCode))
+    if (keycodes.octaves.includes(e.keyCode)) {
+      synth.changeAttribute('octave', keycodes.octaves.indexOf(e.keyCode))
     }
 
-    if (e.keyCode in waveCodes) {
-      synth.changeAttribute('waveType', waveCodes[e.keyCode])
-    }
-  }
-
-  function handleEnd(e) {
-    if (currentNoteCodes.includes(e.keyCode)) {
-      synth.stop(noteCodes[e.keyCode])
+    if (e.keyCode in keycodes.waveShapes) {
+      synth.changeAttribute('waveType', keycodes.waveShapes[e.keyCode])
     }
   }
 
-  document.addEventListener('keydown', handleStart);
-  document.addEventListener('keyup', handleEnd);
-  document.addEventListener('touchstart', handleStart);
-  document.addEventListener('touchend', handleEnd)
+  function handleNoteEnd(e) {
+    if (playingNotes.includes(e.keyCode)) {
+      synth.stop(keycodes.notes[e.keyCode])
+    }
+  }
+
+  document.addEventListener('keydown', handleNoteStart);
+  document.addEventListener('keyup', handleNoteEnd);
+  document.addEventListener('touchstart', handleNoteStart);
+  document.addEventListener('touchend', handleNoteEnd)
+
+  const keys = [
+    ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, '0', ''],
+    ['Q', 'W', 'E', 'R', '', '', '', '', ''],
+    ['S', 'D', '', 'G', 'H', 'J', ''],
+    ['Z','X','C','V','B','N','M', ',']
+  ] 
 
   return (
     <div id="keyboard">
-      <div className="keyboard-row">
-        <span className="circle-outer">
-          <span className="circle-inner">
-            `
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            1
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            2
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            3
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            4
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            5
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            6
-          </span>
-        </span>        
-        <span className="circle-outer">
-          <span className="circle-inner">
-            7
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            8
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            9
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            0
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-      </div>
-      <div className="keyboard-row">
-        <span className="circle-outer">
-          <span className="circle-inner">
-            Q
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            W
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            E
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            R
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-      </div>
-      <div className="keyboard-row">
-        <span className="circle-outer">
-          <span className="circle-inner">
-            S
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            D
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            G
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            H
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            J
-          </span>
-        </span>
-        <span className="circle-outer invisible">
-          <span className="circle-inner">
-          </span>
-        </span>
-      </div>
-      <div className="keyboard-row">
-        <span className="circle-outer">
-          <span className="circle-inner">
-            Z
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            X
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            C
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            V
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            B
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            N
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            M
-          </span>
-        </span>
-        <span className="circle-outer">
-          <span className="circle-inner">
-            ,
-          </span>
-        </span>
-      </div>
+      {keys.map(row => 
+        <div className="keyboard-row">
+          {
+            row.map((key, i) => 
+              <span className={`circle-outer${!key ? ' invisible' : ''}`}>
+                <span className="circle-inner">
+                  {key}
+                </span>
+              </span>
+            )
+          }
+        </div>
+      )}
     </div>
   )
 }
-
-export default Keyboard
