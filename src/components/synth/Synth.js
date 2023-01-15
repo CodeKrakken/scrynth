@@ -1,5 +1,5 @@
 export default function Synth() {
-  this.notes = {
+  const notes = {
     'C' : 4186.01,
     'C#': 4434.92,
     'D' : 4698.63,
@@ -15,7 +15,6 @@ export default function Synth() {
     'C+': 8372.02
   }
   
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
   const context = new AudioContext();
   const playingNotes = {
     'octave' : 4,
@@ -47,6 +46,8 @@ export default function Synth() {
   const gain65 = context.createGain()
   const gain70 = context.createGain()
   const gain80 = context.createGain()
+
+
   oscillator10.connect(gain10);
   oscillator15.connect(gain15);
   oscillator20.connect(gain20);
@@ -86,7 +87,8 @@ export default function Synth() {
   gain65.gain.value = 0
   gain70.gain.value = 0
   gain80.gain.value = 0
-  let oscillators = [
+
+  let keys = [
     { 'oscillator': oscillator10,
       'gain': gain10,
       'note': 'C'
@@ -152,36 +154,27 @@ export default function Synth() {
       'note': 'C+'
     }
   ]
-  oscillator10.start(0);
-  oscillator15.start(0);
-  oscillator20.start(0);
-  oscillator25.start(0);
-  oscillator30.start(0);
-  oscillator40.start(0);
-  oscillator45.start(0);
-  oscillator50.start(0);
-  oscillator55.start(0);
-  oscillator60.start(0);
-  oscillator65.start(0);
-  oscillator70.start(0);
-  oscillator80.start(0);
+
+  keys.forEach(key => {
+    key.oscillator.start(0)
+  })
 
   this.play = function(note) {
     context.resume()
-    let nextOscillatorIndex = oscillators.findIndex(oscillator => oscillator.note === note)
-    oscillators[nextOscillatorIndex].oscillator.type = playingNotes['waveType']
-    oscillators[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
-    oscillators[nextOscillatorIndex].gain.gain.value = 1
+    let nextOscillatorIndex = keys.findIndex(oscillator => oscillator.note === note)
+    keys[nextOscillatorIndex].oscillator.type = playingNotes['waveType']
+    keys[nextOscillatorIndex].oscillator.frequency.value = this.getFrequency(note)
+    keys[nextOscillatorIndex].gain.gain.value = 1
   }
 
   this.stop = function(noteToStop) {
-    let oscillatorToStopIndex = oscillators.findIndex(oscillator => oscillator.note === noteToStop)
-    oscillators[oscillatorToStopIndex].gain.gain.value = 0
+    let oscillatorToStopIndex = keys.findIndex(oscillator => oscillator.note === noteToStop)
+    keys[oscillatorToStopIndex].gain.gain.value = 0
   }
      
   this.getFrequency = (noteString) => {
     let transposition = playingNotes['octave'] - 8
-    let frequency = this.notes[noteString]
+    let frequency = notes[noteString]
     for ( let i = 0 ; i < Math.abs(transposition) ; i++ ) {
       transposition > 0 ?
       frequency = frequency * 2 :
@@ -197,7 +190,7 @@ export default function Synth() {
   }
 
   this.changePlayingNotes = () => {
-    oscillators.forEach(oscillator => {
+    keys.forEach(oscillator => {
       if(oscillator.gain.gain.value > 0) {
         this.play(oscillator.note)
       }
