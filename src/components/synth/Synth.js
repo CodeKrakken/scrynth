@@ -4,25 +4,9 @@ export default function Synth() {
   context.resume()
 
   const settings = {
-    octave  : 0,
+    octave  : 4,
     waveShape: 'sine'
   }
-
-  // const notes = {
-  //   'C' : 4186.01,
-  //   'C#': 4434.92,
-  //   'D' : 4698.63,
-  //   'D#': 4978.03,
-  //   'E' : 5274.04,
-  //   'F' : 5587.65,
-  //   'F#': 5919.91,
-  //   'G' : 6271.93,
-  //   'G#': 6644.88,
-  //   'A' : 7040.00,
-  //   'A#': 7458.62,
-  //   'B' : 7902.13,
-  //   'C+': 8372.02
-  // }
 
   const ratio   = 1.05946274243760910195
   let frequency = 16.35
