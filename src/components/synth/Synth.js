@@ -1,4 +1,5 @@
 export default function Synth() {
+  
   const notes = {
     'C' : 4186.01,
     'C#': 4434.92,
@@ -16,89 +17,76 @@ export default function Synth() {
   }
   
   const context = new AudioContext();
+
   const playingNotes = {
     'octave' : 4,
     'waveType': 'sine'
   }
 
-  const gain10 = context.createGain()
-  const gain15 = context.createGain()
-  const gain20 = context.createGain()
-  const gain25 = context.createGain()
-  const gain30 = context.createGain()
-  const gain40 = context.createGain()
-  const gain45 = context.createGain()
-  const gain50 = context.createGain()
-  const gain55 = context.createGain()
-  const gain60 = context.createGain()
-  const gain65 = context.createGain()
-  const gain70 = context.createGain()
-  const gain80 = context.createGain()
-
   let keys = [
     { 
       'oscillator': context.createOscillator(),
-      'gain': gain10,
+      'gain': context.createGain(),
       'note': 'C'
     }, 
     {
       'oscillator': context.createOscillator(),
-      'gain': gain15,
+      'gain': context.createGain(),
       'note': 'C#'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain20,
+      'gain': context.createGain(),
       'note': 'D'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain25,
+      'gain': context.createGain(),
       'note': 'D#'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain30,
+      'gain': context.createGain(),
       'note': 'E'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain40,
+      'gain': context.createGain(),
       'note': 'F'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain45,
+      'gain': context.createGain(),
       'note': 'F#'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain50,
+      'gain': context.createGain(),
       'note': 'G'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain55,
+      'gain': context.createGain(),
       'note': 'G#'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain60,
+      'gain': context.createGain(),
       'note': 'A'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain65,
+      'gain': context.createGain(),
       'note': 'A#'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain70,
+      'gain': context.createGain(),
       'note': 'B'
     },
     {
       'oscillator': context.createOscillator(),
-      'gain': gain80,
+      'gain': context.createGain(),
       'note': 'C+'
     }
   ]
@@ -109,20 +97,6 @@ export default function Synth() {
     key.gain.gain.value = 0
   })
   
-  // gain10.gain.value = 0
-  // gain15.gain.value = 0
-  // gain20.gain.value = 0
-  // gain25.gain.value = 0
-  // gain30.gain.value = 0
-  // gain40.gain.value = 0
-  // gain45.gain.value = 0
-  // gain50.gain.value = 0
-  // gain55.gain.value = 0
-  // gain60.gain.value = 0
-  // gain65.gain.value = 0
-  // gain70.gain.value = 0
-  // gain80.gain.value = 0
-
   keys.forEach(key => {
     key.oscillator.start(0)
   })
