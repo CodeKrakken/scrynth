@@ -30,12 +30,11 @@ export default function Synth() {
     return key
   }))
     
-  this.play = (note, playingNoteCount) => {
+  this.play = (note) => {
     const i = keys.findIndex(key => key.note === note)
     keys[i].oscillator.type = settings.waveShape
     keys[i].oscillator.frequency.value = transpose(keys[i].frequency)
-    console.log(playingNoteCount)
-    keys[i].gain.gain.value = 1/playingNoteCount
+    keys[i].gain.gain.value = 1
   }
 
   this.stop = (note) => {
