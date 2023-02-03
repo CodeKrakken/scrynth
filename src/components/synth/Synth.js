@@ -8,7 +8,7 @@ export default function Synth() {
     waveShape: 'sine'
   }
 
-  const ratio   = 1.05946274243760910195
+  const ratio   = Math.pow(2, 1/12)
   let frequency = 16.35
   let notes     = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C+']
   
@@ -34,7 +34,7 @@ export default function Synth() {
     const i = keys.findIndex(key => key.note === note)
     keys[i].oscillator.type = settings.waveShape
     keys[i].oscillator.frequency.value = transpose(keys[i].frequency)
-    console.log(transpose(keys[i].frequency))
+    console.log(playingNoteCount)
     keys[i].gain.gain.value = 1/playingNoteCount
   }
 
@@ -47,7 +47,6 @@ export default function Synth() {
   this.changeAttribute = (a, v) => {
 
     settings[a] = v
-
     keys.forEach(key => {
       if(key.gain.gain.value > 0) {
         this.play(key.note)

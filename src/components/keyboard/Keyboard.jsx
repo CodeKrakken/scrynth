@@ -6,7 +6,7 @@ const synth = new Synth()
 
 export default function Keyboard() {
 
-  const keycodes = {
+  const keyCodes = {
     notes   : {
       90 : 'C' ,  6: 'C' ,  83 : 'C#',  1: 'C#',
       88 : 'D' ,  7: 'D' ,  68 : 'D#',  2: 'D#',
@@ -27,33 +27,33 @@ export default function Keyboard() {
   
   let playingNotes = []
 
-  function handleNoteStart(e) {
+  function handleKeyDown(e) {
     
-    if (e.keyCode in keycodes.notes && !playingNotes.includes(e.keyCode)) {
+    if (e.keyCode in keyCodes.notes && !playingNotes.includes(e.keyCode)) {
       playingNotes.push(e.keyCode)
-      synth.play(keycodes.notes[e.keyCode], playingNotes.length)
+      synth.play(keyCodes.notes[e.keyCode], playingNotes.length)
     }
 
-    if (keycodes.octaves.includes(e.keyCode)) {
-      synth.changeAttribute('octave', keycodes.octaves.indexOf(e.keyCode))
+    if (keyCodes.octaves.includes(e.keyCode)) {
+      synth.changeAttribute('octave', keyCodes.octaves.indexOf(e.keyCode))
     }
 
-    if (e.keyCode in keycodes.waveShapes) {
-      synth.changeAttribute('waveType', keycodes.waveShapes[e.keyCode])
+    if (e.keyCode in keyCodes.waveShapes) {
+      synth.changeAttribute('waveType', keyCodes.waveShapes[e.keyCode])
     }
   }
 
-  function handleNoteEnd(e) {
+  function handleKeyUp(e) {
     if (playingNotes.includes(e.keyCode)) {
       playingNotes = playingNotes.filter(note => note !== e.keyCode)
-      synth.stop(keycodes.notes[e.keyCode])
+      synth.stop(keyCodes.notes[e.keyCode])
     }
   }
 
-  document.addEventListener('keydown', handleNoteStart);
-  document.addEventListener('keyup', handleNoteEnd);
-  document.addEventListener('touchstart', handleNoteStart);
-  document.addEventListener('touchend', handleNoteEnd)
+  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener('keyup', handleKeyUp);
+  document.addEventListener('touchstart', handleKeyDown);
+  document.addEventListener('touchend', handleKeyUp)
 
   const keys = [
     ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, '0', ''],
